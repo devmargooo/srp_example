@@ -9,7 +9,18 @@
   margin: 0 auto;
   border: 1px solid black;
   padding: 30px;
+}
+
+.error {
   color: red;
+}
+
+.success {
+  color: green;
+}
+
+.errorRedisigned {
+  color: orange;
 }
 
 .input__root {

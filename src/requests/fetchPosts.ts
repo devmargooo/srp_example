@@ -1,16 +1,21 @@
 import { notify } from "./helpers/notify";
 
-export function fetchPosts(): void {
-    fetch("https://jsonplaceholder.typicode.com/posts")
+export type TPost = {
+    id: number;
+    title: string;
+}
+
+const SERVER_IS_TEAPOT = "сервер с нами не разговаривает";
+
+export function fetchPosts(): Promise<TPost[]> {
+    return fetch("https://jsonplaceholder.typicode.com/posts")
         .then((response) => {
             if (response.status === 200) {
                 return response.json();
             }
-            notify("Error :(");
+            throw new Error(SERVER_IS_TEAPOT);
         })
-        .then((result: Object[] | undefined) => {
-            if (result) {
-                notify("get data:" + JSON.stringify(result, null, 4));
-            }
-        });
+        .catch((e) => {
+            throw new Error(SERVER_IS_TEAPOT);
+        })
 }
